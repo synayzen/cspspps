@@ -1,0 +1,37 @@
+const { Message, Client, MessageEmbed } = require("discord.js");
+const User = require("../../Models/Database/User");
+const InventoryManager = require("../../Managers/Inventory/InventoryManager");
+
+const moment = require("moment");
+require("moment-duration-format");
+require("moment-timezone");
+
+
+/**
+ * @param {Client} client 
+ * @param {Message} message 
+ * @param {Array<String>} args 
+ */
+module.exports.execute = async (client, message, args) => {
+    let user = await User.findOrCreate(message.author.id);
+
+    if (user.DailyCrate) {
+        let nextDay = user.DailyCrate + (1000 * 60 * 60 * 2);
+        if (Date.now() < nextDay) {
+            return message.reply(`Yok ya başka isteğin bekleyeceksin.. yeni kasa almak için **${moment.duration((nextDay - Date.now())).format("HH:mm:ss")} saat** beklemen gerekiyor!`);
+        }
+    }
+    let item = InventoryManager.FindItem("COIN_CRATE");
+    InventoryManager.addItemOfInventory(user, item, 1);
+    User.updateOne({ _id: user._id }, { $set: { "DailyCrate": Date.now() } }).exec();
+    message.reply(`günlük <:chestt:843437349966839840> **${InventoryManager.Number(1)}** aldın!`);
+}
+
+module.exports.settings = {
+    Commands: ["günlükkasa"],
+    Usage: "günlükkasa",
+    Description: "Günlük alabileceğin kasayı alırsın.",
+    Category: "Economy",
+    cooldown: 5000,
+    Activity: true
+}

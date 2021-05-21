@@ -1,0 +1,6 @@
+{
+    "Token": "ODEyMjE3ODMzNDI1MDc2MjY0.YC9izQ.EenbuMu8ZD89Tsll6o5oK5NU53w",
+    "Prefix": "+",
+    "DatabaseUrl": "mongodb+srv://synayzen11:1708ali1708@cluster0.vifku.mongodb.net/data?retryWrites=true&w=majority",
+    "DatabaseName": "data"
+}

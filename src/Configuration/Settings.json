@@ -1,0 +1,106 @@
+{
+    "Server":{
+        "Id": "664472621248806922"
+    },
+
+    "Welcome": {
+        "Channel": "WELCOME_CHANNEL_ID"
+    },
+
+    "PrivHub": {
+        "Room": "799724046895415347",
+        "Symbol": "🏠"
+    },
+
+    "Authorization": {
+        "Registers":{
+            "Roles": ["AUTH_ROLE_1", "AUTH_ROLE_2"],
+            "NameAndAge": true,
+            "AgeLimit": 13,
+            "Brace": " | ",
+            "ManRoles": ["MAN_ROLE_1", "MAN_ROLE_2"],
+            "WomanRoles": ["WOMAN :D", "WOMAN :D"]
+        },
+        "Transporter": {
+            "Roles": ["TRANSPORTER_ROLE_1"],
+            "Cooldown": 15
+        },
+        "NameChanger":{
+            "Roles": ["NAME_CHANGER_ROLE"],
+            "ForceTag": true,
+            "ForceTagFormat": "<tag> <name>"
+        }
+    },
+
+    "Invite": {
+        "Channel": "INVITE_COUNTER_CHANNEL"
+    },
+
+    "Tag": {
+        "Symbol": "SYMBOL_1",
+        "Symbol_2": "SYMBOL_2",
+        "Role": "TAG_ROLE_ID",
+        "Log": "TAG_LOG_CHANNEL"
+    },
+
+    "Roles": {
+        "Unregistered": ["UNREGISTERED_ROLE"],
+        "BoosterRole": "BOOSTER_ROLE"
+    },
+
+    "Stats": {
+        "Message":{
+            "BypassChannels": [],
+            "Cooldown": 1
+        },
+        "Voice": {
+            "BypassChannels": []
+        }
+    },
+
+    "Penals": {
+        "SendPrivateMessage": false,
+        "Jail": {
+            "AuthRoles": ["AUTH_ROLES"],
+            "Role": "JAIL_ROLE_ID",
+            "Log": "JAIL_LOG_CHANNEL_ID",
+            "Limit": 3
+        },
+        "Mute": {
+            "AuthRoles": ["AUTH_ROLES"],
+            "Role": "MUTE_ROLE_ID",
+            "Log": "MUTE_CHANNEL_LOG_ID"
+        },
+        "VoiceMute": {
+            "AuthRoles": ["AUTH_ROLES"],
+            "Role": "MUTE_ROLE_ID",
+            "Log": "MUTE_CHANNEL_LOG_ID",
+            "ManualMute": true
+        },
+        "Suspect": {
+            "AuthRoles": [],
+            "Role": "SUSPET_ROLE_ID",
+            "Log": "SUSPECT_LOG_CHANNEL"
+        },
+        "Ban": {
+            "AuthRoles": ["AUTH_ROLE"],
+            "Log": "BAN_CHANNEL_ID",
+            "Limit": 3
+        },
+        "Warn": {
+            "AuthRoles": ["AUTH_ROLE"],
+            "Log": "WARN_CHANNEL_ID",
+            "Role": ["842504851631505448"]
+        },
+        "Kick": {
+            "AuthRoles": ["AUTH_ROLE"],
+            "Log": "KICK_LOG_CHANNEL",
+            "Limit": 3
+        }
+    },
+
+    "Market": {
+        "MaxCoinBet": 50000,
+        "DropChannel": "843184346265681961"
+    }
+}

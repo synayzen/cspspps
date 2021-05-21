@@ -1,0 +1,49 @@
+const { Message, Client, MessageEmbed } = require("discord.js");
+const Settings = require("../../Configuration/Settings.json");
+const User = require("../../Models/Database/User");
+
+const InventoryManager = require("../../Managers/Inventory/InventoryManager");
+
+/**
+ * @param {Client} client 
+ * @param {Message} message 
+ * @param {Array<String>} args 
+ */
+module.exports.execute = async (client, message, args) => {
+    if(!args[0]) return message.reply(`komutu yanlış kullandın. Doğru kullanımı \`${this.settings.Usage}\``)
+    let value = Number(args[0]);
+    if(isNaN(value)) return message.reply(`geçerli bir bahis miktarı girmelisin.`);
+    value = value.toFixed(0);
+
+    if(value <= 0) return message.reply("değer 0'dan küçük olamaz");
+
+    if(value > Settings.Market.MaxCoinBet) return message.reply(`maksimum **${Settings.Market.MaxCoinBet}** değerinde bir bahis girebilirsin.`);
+
+    let user = await User.findOrCreate(message.author.id);
+    if(user.Coin < value) return message.reply("geçerli bir miktar giriniz.");
+    if(value <= 0) return message.reply("yeterli puanın yok.");
+    await User.updateOne({Id: message.author.id}, {$inc: {Coin: -value}}).exec();
+
+    message.channel.send(`${message.author}, <a:PARA:838420908347490374> para fırlatılıyor...`).then(msg => {
+        setTimeout(() => {
+            let rnd = Math.floor(Math.random() * 2), result;
+            if(rnd == 1){
+                result = "kazandın";
+                value = Number(value);
+                let coin = value + value;
+                User.updateOne({Id: message.author.id}, {$inc: {Coin: Number(coin)}}).exec();
+            }
+            else result = "kaybettin";
+            msg.edit(`${message.author}, <:dolar:843433771168694282> **${InventoryManager.Number(value)}** ${result}! ${rnd == 1 ?  "<a:mavitick:838420820711178270>" : "<a:arp:843435007716360212>"}`);    
+        }, 2000);
+    });
+}
+
+module.exports.settings = {
+    Commands: ["yazitura", "yazıtura", "parayıyatır", "parayatır", "yatırparayı"],
+    Usage: "yatırparayı <bahis>",
+    Description: "Üzerinde bulunan puanları kullanarak bahis oynarsın ve %50 şans ile kazanır ya da kaybedersin.",
+    Category: "Economy",
+    cooldown: 2500,
+    Activity: true
+}
